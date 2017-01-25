@@ -17,5 +17,46 @@
     android:addStatesFromChildren="false">
 
 
+    <CheckBox
+        android:text="Checkbox"
+        android:column_Weight="1"
+        android:gravity="fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkbox"
+        android:layout_alignParentStart="true"
+        />
+
+    <RadioButton
+        android:text="Radiobutton"
+        android:column_Weight="1"
+        android:gravity="fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radio"
+        android:layout_alignParentStart="true"
+        />
+
+    <Switch
+        android:text="Enable Something"
+        android:column_Weight="1"
+        android:gravity="fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/_switch"
+        android:layout_alignParentStart="true"
+        />
+
+    <ImageButton
+        android:text="ImageButton"
+        android:column_Weight="1"
+        android:gravity="fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebutton"
+        android:layout_alignParentStart="true"
+        android:background="@android:drawable/btn_star_big_on" />
 
 </GridLayout>
+
+
