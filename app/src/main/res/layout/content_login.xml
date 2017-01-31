@@ -12,7 +12,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.justin.androidlabs.LoginActivity"
-    tools:showIn="@layout/activity_login">
+    tools:showIn="@layout/activity_login"
+    >
 
     <TextView
         android:text="@string/login"
@@ -27,7 +28,9 @@
         android:ems="10"
         android:id="@+id/editText"
         android:hint="login name"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+
+        />
 
     <TextView
         android:text="@string/PasswordText"
