@@ -63,7 +63,7 @@ public class StartActivity extends AppCompatActivity {
             String messagePassed = data.getStringExtra("Response");
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(this , messagePassed, duration);
-            toast.show(); 
+            toast.show();
         }
     }
 
