@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        sPref = getSharedPreferences("myFileName", Context.MODE_PRIVATE);
+        sPref = getSharedPreferences("DefaultEmail", Context.MODE_PRIVATE);
 
         emailText = (EditText) findViewById(R.id.editText);
 
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailText.toString();
+                String email = emailText.getText().toString();
                 writer.putString("DefaultEmail", email);
                 writer.commit();
                 Intent intent = new Intent(LoginActivity.this, StartActivity.class);
