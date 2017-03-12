@@ -11,8 +11,10 @@ import android.widget.ProgressBar;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.HttpURLConnection;
 
@@ -30,38 +32,56 @@ public class WeatherForecast extends AppCompatActivity {
 
     }
 
-    class forecastQuery extends AsyncTask<String, Integer, String>{
-        String minTemp, maxTemp, currentTemp;
-        Bitmap wPic;
+    class ForecastQuery extends AsyncTask<String, Integer, String>{
+        String  minTemperature, maxTemperature, currentTemperature;
+        Bitmap weatherPic;
+
         @Override
         protected String doInBackground(String... params) {
-            String urlString = "http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric";
-            try {
-                URL url = new URL(urlString);
+            String urlString = "http://api.openweathermap.org/data/2.5/weather?q=ottawa," +
+                    "ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric";
+            URL url = null;
+            HttpURLConnection conn = null;
+            InputStream in = null;
+            XmlPullParser parser = null;
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(15000);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            conn.connect();
-
-            InputStream in = conn.getInputStream();
-
-            try {
-                XmlPullParser parser = Xml.newPullParser();
+            try
+            {
+                url = new URL(urlString);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+                conn.connect();
+                in = conn.getInputStream();
+                parser = Xml.newPullParser();
                 parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
                 parser.setInput(in, null);
                 parser.nextTag();
-                return String.valueOf(parser);
-            } catch (XmlPullParserException e) {
+            }
+            catch (MalformedURLException e){
                 e.printStackTrace();
-            } finally {
-                in.close();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (XmlPullParserException e){
+                e.printStackTrace();
             }
-            }catch (java.io.IOException ioE){
-                ioE.getMessage();
+
+            try {
+                while (parser.next()) {
+
+                }
             }
+            catch (IOException e) {
+                e.printStackTrace();
+            } catch (XmlPullParserException e){
+                e.printStackTrace();
+            }
+
+            return conn.getInputStream();
         }
     }
 }
