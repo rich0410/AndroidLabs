@@ -3,6 +3,7 @@ package com.example.justin.androidlabs;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,10 +43,15 @@ public class ChatWindow extends AppCompatActivity {
         messageAdapter =new ChatAdapter( this );
         cDBH = new ChatDatabaseHelper(this);
         dbWrite= cDBH.getWritableDatabase();
-        c = dbWrite.rawQuery("SELECT Message FROM ?", new String[]{"MessageTable"});
+        if(dbWrite.isOpen()){
+            Log.i(activity, "Open");
+        }
+        c = dbWrite.rawQuery("SELECT Message FROM MessageTable;", null);
+        c.moveToFirst();
         cv = new ContentValues();
 
         lView.setAdapter (messageAdapter);
+
         textBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +69,17 @@ public class ChatWindow extends AppCompatActivity {
             }
         });
 
-        while(!c.isAfterLast()) {
-            Log.i(activity, "SQL MESSAGE:"+c.getString(c.getColumnIndex(cDBH.KEY_MESSAGE)));
+        int count = 0;
+
+        try {
+            while (!c.isAfterLast()) {
+                Log.i(activity, "SQL MESSAGE:" + c.getString(c.getColumnIndex(cDBH.KEY_MESSAGE)));
+                chatList.add(c.getString(c.getColumnIndex(cDBH.KEY_MESSAGE)));
+                c.moveToNext();
+            }
+        }
+        catch(CursorIndexOutOfBoundsException cioobE) {
+            Log.i(activity, "Crashed :"+cioobE.getMessage());
         }
 
         Log.i(activity, "Cursor’s column count =" + c.getColumnCount());
@@ -102,6 +117,7 @@ public class ChatWindow extends AppCompatActivity {
 
         }
     }
+
 
     @Override
     protected void onDestroy(){

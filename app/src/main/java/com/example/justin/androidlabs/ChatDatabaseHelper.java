@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class ChatDatabaseHelper extends SQLiteOpenHelper {
     protected static String DATABASE_NAME = "MessageTable", KEY_ID = "MessageNumber", KEY_MESSAGE = "Message";
-    protected static int VERSION_NUM = 1;
+    protected static int VERSION_NUM = 2;
 
     public ChatDatabaseHelper(Context ctx){
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
@@ -20,13 +20,13 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.i("ChatDatabaseHelper", "Calling onCreate");
-        db.execSQL("CREATE TABLE " + DATABASE_NAME + " ("+KEY_ID+" STRING PRIMARY KEY AUTO-INCREMENT, "+KEY_MESSAGE+" String);" );
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + DATABASE_NAME + " ("+KEY_ID+" integer PRIMARY KEY AUTOINCREMENT, "+KEY_MESSAGE+" String);" );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.i("ChatDatabaseHelper", "Calling onUpgrade, oldVersion=" + oldVersion + " newVersion=" + newVersion);
-        db.execSQL("DROP TABLE IF EXIST "+DATABASE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+DATABASE_NAME);
         onCreate(db);
     }
 
