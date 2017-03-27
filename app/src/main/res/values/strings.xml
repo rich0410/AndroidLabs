@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AndroidLabs</string>
+    <string name="hello_message">Hello World!</string>
+    <string name="ButtonText">I\'m a button</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="TextViewText">Login</string>
+    <string name="PasswordText">Password</string>
+    <string name="title_activity_list_items">ListItemsActivity</string>
+    <string name="login">Login</string>
+    <string name="loginemail">Enter User Email Address</string>
+    <string name="dialog_message">Do you want to finish the activity?</string>
+    <string name="dialog_title">Confirm exit</string>
+    <string name="ok">OK</string>
+    <string name="loginbuttom">Login</string>
+    <string name="cancel">Cancel</string>
+    <string name="chatButton">Start Chat</string>
+    <string name="sendButton">Send</string>
+    <string name="weatherButton">Weather Forecast</string>
+</resources>
